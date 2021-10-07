@@ -1,0 +1,65 @@
+<template>
+    <v-container fluid>
+        <v-app-bar color="white" dark app>
+            <v-tab>
+                <router-link tag="li" class="col" class-active="active" to="/"
+                    >Главная</router-link
+                >
+            </v-tab>
+            <v-tab>
+                <router-link
+                    tag="li"
+                    class="col"
+                    class-active="active"
+                    to="/Product"
+                    >Каталог товаров</router-link
+                >
+            </v-tab>
+            <v-tab>
+                <router-link
+                    tag="li"
+                    class="col"
+                    class-active="active"
+                    to="/Feedback"
+                    >Связаться с нами</router-link
+                >
+            </v-tab>
+            <v-spacer></v-spacer>
+            <v-btn icon>
+                <router-link
+                    tag="li"
+                    class="col"
+                    class-active="active"
+                    to="/Basket"
+                >
+                    <v-icon
+                        v-if="$store.state.basket.count == 0"
+                        color="blue-grey darken-4"
+                        >mdi-basket</v-icon
+                    >
+                    <v-icon v-else color="red">mdi-basket</v-icon>
+                </router-link>
+            </v-btn>
+        </v-app-bar>
+    </v-container>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style>
+li{
+    list-style-type: none;
+}
+li:hover,
+li.router-link-active,
+li.router-link-exact-active {
+    text-decoration: underline #212a3d;
+    
+}
+
+li {
+    color: #212a3d;
+}
+</style>
