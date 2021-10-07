@@ -1,6 +1,7 @@
 <template>
-<div id="app" >
-  <v-app id="inspire">
+<v-container>
+<div id="app">
+  <v-app id="inspire" class="texta about">
     <v-carousel
       cycle
       height="400"
@@ -41,8 +42,13 @@
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
+    <div class="texta">
+    <h1>About</h1>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, quidem corrupti nobis reprehenderit in aliquid vel necessitatibus laborum magnam minima deserunt molestiae, modi quisquam magni, alias quibusdam perferendis molestias! Adipisci.</p>
+  </div>
   </v-app>
 </div>
+</v-container>
 </template>
 
 <script>
@@ -67,6 +73,15 @@ export default {
   },}
 </script>
 
-<style>
-
+<style scope>
+.texta .about{
+  margin-top:40px;
+}
+.texta h1{
+  margin-top: 100px;
+ text-align: center;
+}
+p{
+  margin-top: 70px;
+}
 </style>

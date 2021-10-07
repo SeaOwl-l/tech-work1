@@ -2,7 +2,7 @@
     <div class="team">
         <v-container class="my-3">
             <v-layout row wrap>
-                <v-col xs12 sm6 md4>
+                <v-col xs12 sm6 md3>
                     <v-card
                         class="text-xs-center ma-3 card-prod"
                         tile
@@ -58,7 +58,8 @@ export default {
 
 <style scoped>
 .team {
-    margin-top: 30px;
+ margin-top: 30px;
+ margin-left: 20px;
 }
 
 </style>

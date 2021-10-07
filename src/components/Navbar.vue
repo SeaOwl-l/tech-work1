@@ -37,7 +37,14 @@
                         color="blue-grey darken-4"
                         >mdi-basket</v-icon
                     >
-                    <v-icon v-else color="red">mdi-basket</v-icon>
+                    <div v-else>
+                        <v-icon  color="blue darken-3">mdi-basket </v-icon>
+                        <v-badge
+                        dot
+                        left
+                        overlap></v-badge>
+                    </div>
+                     
                 </router-link>
             </v-btn>
         </v-app-bar>
