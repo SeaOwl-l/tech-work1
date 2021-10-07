@@ -74,8 +74,8 @@ export default {
 </script>
 
 <style scope>
-.texta .about{
-  margin-top:40px;
+.about{
+  margin-top:35px;
 }
 .texta h1{
   margin-top: 100px;
@@ -83,5 +83,6 @@ export default {
 }
 p{
   margin-top: 70px;
+  padding-bottom: 150px;
 }
 </style>
