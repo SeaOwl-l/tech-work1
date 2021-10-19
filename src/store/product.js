@@ -1,79 +1,7 @@
+import { getDatabase, ref, onValue } from 'firebase/database';
 export default {
     state: {
-        team: [
-            {
-                id: 1,
-                name: 'the tomato',
-                price: 100,
-                massa: '1кг',
-                currency: '$',
-                url:
-                    'https://avatars.mds.yandex.net/get-zen_doc/4395091/pub_6099082887bf2977fc1b31ff_609908fba38d215d4ead542d/scale_1200',
-            },
-            {
-                id: 2,
-                name: 'Summer',
-                price: 150,
-                massa: '1 day',
-                currency: '$',
-                url:
-                    'https://www.nastol.com.ua/download.php?img=201209/1680x1050/nastol.com.ua-33065.jpg',
-            },
-            {
-                id: 3,
-                name: 'the tomato',
-                price: 100,
-                massa: '1кг',
-                currency: '$',
-                url:
-                    'https://avatars.mds.yandex.net/get-zen_doc/4395091/pub_6099082887bf2977fc1b31ff_609908fba38d215d4ead542d/scale_1200',
-            },
-            {
-                id: 4,
-                name: 'the tomato',
-                price: 100,
-                massa: '1кг',
-                currency: '$',
-                url:
-                    'https://avatars.mds.yandex.net/get-zen_doc/4395091/pub_6099082887bf2977fc1b31ff_609908fba38d215d4ead542d/scale_1200',
-            },
-            {
-                id: 5,
-                name: 'the tomato',
-                price: 100,
-                massa: '1кг',
-                currency: '$',
-                url:
-                    'https://avatars.mds.yandex.net/get-zen_doc/4395091/pub_6099082887bf2977fc1b31ff_609908fba38d215d4ead542d/scale_1200',
-            },
-            {
-                id: 6,
-                name: 'the tomato',
-                price: 100,
-                massa: '1кг',
-                currency: '$',
-                url:
-                    'https://avatars.mds.yandex.net/get-zen_doc/4395091/pub_6099082887bf2977fc1b31ff_609908fba38d215d4ead542d/scale_1200',
-            },
-            {
-                id: 7,
-                name: 'the tomato',
-                price: 100,
-                massa: '1кг',
-                currency: '$',
-                url:
-                    'https://avatars.mds.yandex.net/get-zen_doc/4395091/pub_6099082887bf2977fc1b31ff_609908fba38d215d4ead542d/scale_1200',
-            },
-            {
-                id: 8,
-                name: 'the tomato',
-                price: 100,
-                massa: '1кг',
-                currency: '$',
-                url:
-                    'https://avatars.mds.yandex.net/get-zen_doc/4395091/pub_6099082887bf2977fc1b31ff_609908fba38d215d4ead542d/scale_1200',
-            },
-        ],
+        team: [],
         oneProduct: {},
     },
     mutations: {
@@ -83,6 +11,26 @@ export default {
                     state.oneProduct = element;
                 }
             });
+        },
+        getItems(state) {
+            var products = [];
+            const db = getDatabase();
+            const dbRef = ref(db, '/Products');
+            onValue(
+                dbRef,
+                (snapshot) => {
+                    snapshot.forEach((childSnapshot) => {
+                        const childKey = childSnapshot.key;
+                        const childData = childSnapshot.val();
+                        childData.id = Number(childKey);
+                        products.push(childData);
+                    });
+                },
+                {
+                    onlyOnce: true,
+                }
+            );
+            state.team = products;
         },
     },
     getters: {

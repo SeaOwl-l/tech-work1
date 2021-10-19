@@ -1,33 +1,18 @@
 <template>
     <v-container class="cnt-feedback" pt-6 pb-10>
         <validation-observer ref="observer" v-slot="{ invalid }">
-            <form @submit.prevent="submit">
+            <form @submit.prevent="sendMessage">
                 <validation-provider
                     v-slot="{ errors }"
-                    name="Name"
+                    name="name"
                     rules="required|max:20"
                 >
                     <v-text-field
                         v-model="name"
+                        name="name"
                         :counter="20"
                         :error-messages="errors"
                         label="Ваше имя"
-                        required
-                    ></v-text-field>
-                </validation-provider>
-                <validation-provider
-                    v-slot="{ errors }"
-                    name="phoneNumber"
-                    :rules="{
-                        required: true,
-                        regex:
-                            '(\\+)?(\\(\\d{2,3}\\) ?\\d|\\d)(([ \\-]?\\d)|( ?\\(\\d{2,3}\\) ?)){5,12}\\d$',
-                    }"
-                >
-                    <v-text-field
-                        v-model="phoneNumber"
-                        :error-messages="errors"
-                        label="Ваш номер телефона"
                         required
                     ></v-text-field>
                 </validation-provider>
@@ -37,6 +22,7 @@
                     rules="required|email"
                 >
                     <v-text-field
+                        name="email"
                         v-model="email"
                         :error-messages="errors"
                         label="Ваш E-mail"
@@ -50,6 +36,7 @@
                 >
                     <v-textarea
                         autocomplete="message"
+                        name="message"
                         v-model="message"
                         :counter="450"
                         :error-messages="errors"
@@ -68,6 +55,7 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import emailjs from 'emailjs-com';
 
 export default {
     components: {
@@ -76,14 +64,31 @@ export default {
     },
     data: () => ({
         name: '',
-        phoneNumber: '',
         email: '',
         message: '',
     }),
 
     methods: {
-        submit() {
+        sendMessage(e) {
             this.$refs.observer.validate();
+            try {
+                emailjs.sendForm(
+                    'service_xld7tgi',
+                    'template_103r9mt',
+                    e.target,
+                    'user_UjzrfwbYpnFovEHz1vjQk',
+                    {
+                        name: this.name,
+                        email: this.email,
+                        message: this.message,
+                    }
+                );
+                this.name = "";
+                this.email = "";
+                this.message = "";
+            } catch (error) {
+                console.log({ error });
+            }
         },
     },
 };
